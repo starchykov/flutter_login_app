@@ -19,6 +19,7 @@ class AppViewModel extends ChangeNotifier {
 
   AppViewModel() {
     _themeSubscription = _themeService.themeStream.listen((_) => setTheme());
+    setTheme();
   }
 
   Future<void> setTheme() async {

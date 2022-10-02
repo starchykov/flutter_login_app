@@ -20,6 +20,7 @@ class SettingPage extends StatelessWidget {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
         automaticallyImplyLeading: true,
+        middle: Text('Settings'),
       ),
       child: Center(
         child: Column(

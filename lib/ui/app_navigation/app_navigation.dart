@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_login_app/ui/screens/counter_screen/counter_page.dart';
 import 'package:flutter_login_app/ui/screens/home_screen/home_page.dart';
 import 'package:flutter_login_app/ui/screens/loader_screen/loader_page.dart';
 import 'package:flutter_login_app/ui/screens/login_screen/login_page.dart';
@@ -20,4 +21,10 @@ class AppNavigation {
     AppNavigationRoutes.homeWidget: (context) => HomePage.render(),
     AppNavigationRoutes.settingWidget: (context) => SettingPage.render(),
   };
+
+  final List<Widget> bottomNavigationScreens = <Widget>[
+    CounterPage.render(),
+    CounterPage.render(),
+    SettingPage.render(),
+  ];
 }
