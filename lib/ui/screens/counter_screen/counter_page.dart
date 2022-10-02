@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_app/ui/screens/counter_page/counter_state.dart';
-import 'package:flutter_login_app/ui/screens/counter_page/counter_view_model.dart';
+import 'package:flutter_login_app/ui/screens/counter_screen/counter_state.dart';
+import 'package:flutter_login_app/ui/screens/counter_screen/counter_view_model.dart';
 
 import 'package:provider/provider.dart';
 

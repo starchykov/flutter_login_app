@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_login_app/domain/services/theme_service.dart';
-import 'package:flutter_login_app/ui/screens/setting_page/setting_page_state.dart';
+import 'package:flutter_login_app/ui/screens/setting_screen/setting_page_state.dart';
 
 class SettingPageViewModel extends ChangeNotifier {
   final ThemeService _themeService = ThemeService();

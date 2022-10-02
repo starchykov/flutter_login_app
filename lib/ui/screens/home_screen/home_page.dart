@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_login_app/ui/screens/counter_page/counter_page.dart';
-import 'package:flutter_login_app/ui/screens/home_page/home_view_model.dart';
+import 'package:flutter_login_app/ui/screens/counter_screen/counter_page.dart';
+import 'package:flutter_login_app/ui/screens/home_screen/home_view_model.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -35,20 +35,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-// CupertinoPageScaffold(
-// navigationBar:  CupertinoNavigationBar(
-// automaticallyImplyLeading: false,
-// leading: CupertinoButton(
-// padding: EdgeInsets.zero,
-// child: const Icon(CupertinoIcons.settings),
-// onPressed: () => model.onSettingButtonPressed(),
-// ),
-// middle: const Text('MVVM architecture'),
-// trailing: CupertinoButton(
-// padding: EdgeInsets.zero,
-// child: const Icon(CupertinoIcons.square_arrow_right),
-// onPressed: () async => await model.onLogoutButtonPressed(),
-// ),
-// ), child: CounterPage.render(),
-// );

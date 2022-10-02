@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_login_app/ui/screens/home_page/home_page.dart';
-import 'package:flutter_login_app/ui/screens/loader_page/loader_page.dart';
-import 'package:flutter_login_app/ui/screens/login_page/login_page.dart';
-import 'package:flutter_login_app/ui/screens/setting_page/setting_page.dart';
+import 'package:flutter_login_app/ui/screens/home_screen/home_page.dart';
+import 'package:flutter_login_app/ui/screens/loader_screen/loader_page.dart';
+import 'package:flutter_login_app/ui/screens/login_screen/login_page.dart';
+import 'package:flutter_login_app/ui/screens/setting_screen/setting_page.dart';
 
 
 

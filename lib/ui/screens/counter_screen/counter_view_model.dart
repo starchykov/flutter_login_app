@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_app/domain/services/count_service.dart';
-import 'package:flutter_login_app/ui/screens/counter_page/counter_state.dart';
+import 'package:flutter_login_app/ui/screens/counter_screen/counter_state.dart';
 
 class CounterViewModel extends ChangeNotifier {
   final CountService _countService = CountService();
