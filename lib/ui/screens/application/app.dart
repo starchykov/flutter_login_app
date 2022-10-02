@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_login_app/domain/constants/constants.dart';
-import 'package:flutter_login_app/ui/navigation/app_navigation.dart';
+import 'package:flutter_login_app/ui/app_navigation/app_navigation.dart';
 import 'package:flutter_login_app/ui/screens/application/app_state.dart';
 import 'package:flutter_login_app/ui/screens/application/app_view_model.dart';
 import 'package:provider/provider.dart';

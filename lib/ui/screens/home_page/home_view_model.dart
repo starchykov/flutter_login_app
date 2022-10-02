@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_app/domain/services/auth_repository.dart';
-import 'package:flutter_login_app/ui/navigation/app_navigation.dart';
+import 'package:flutter_login_app/domain/services/auth_service.dart';
+import 'package:flutter_login_app/ui/app_navigation/app_navigation.dart';
 
 class HomeViewModel {
   final BuildContext context;

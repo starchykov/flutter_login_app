@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeViewModel model = context.read<HomeViewModel>();
     return CupertinoTabScaffold(
-      tabBuilder: (builder, int) => CounterPage.render(),
+      tabBuilder: (builder, int index) => CounterPage.render(),
       tabBar: CupertinoTabBar(
         items: const [
           BottomNavigationBarItem(
