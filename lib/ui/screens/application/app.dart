@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_login_app/screens/application/app_state.dart';
-import 'package:flutter_login_app/screens/application/app_view_model.dart';
+import 'package:flutter_login_app/domain/constants/constants.dart';
+import 'package:flutter_login_app/ui/navigation/app_navigation.dart';
+import 'package:flutter_login_app/ui/screens/application/app_state.dart';
+import 'package:flutter_login_app/ui/screens/application/app_view_model.dart';
 import 'package:provider/provider.dart';
-
 
 class MVVMApp extends StatelessWidget {
   const MVVMApp({Key? key}) : super(key: key);
@@ -16,16 +17,16 @@ class MVVMApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AppNavigation appNavigation = AppNavigation();
+    final AppViewModel viewModel = context.read<AppViewModel>();
     final AppState state = context.select((AppViewModel viewModel) => viewModel.state);
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
-      theme:  CupertinoThemeData(
+      theme: CupertinoThemeData(
         primaryColor: CupertinoColors.activeBlue,
         brightness: state.isDarkTheme ? Brightness.dark : Brightness.light,
       ),
-      supportedLocales: Language.locales,
-      routes: appNavigation.routes,
+      // supportedLocales: Language.locales,
+      routes: viewModel.appNavigation.routes,
       initialRoute: AppNavigationRoutes.loaderWidget,
     );
   }

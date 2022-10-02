@@ -1,14 +1,19 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:mvvm_architecture/domain/services/theme_service.dart';
-import 'package:mvvm_architecture/ui/widgets/application/app_state.dart';
+import 'package:flutter_login_app/domain/services/theme_service.dart';
+import 'package:flutter_login_app/ui/navigation/app_navigation.dart';
+import 'package:flutter_login_app/ui/screens/application/app_state.dart';
 
 class AppViewModel extends ChangeNotifier {
   final ThemeService _themeService = ThemeService();
-  AppState _state =  AppState(isDarkTheme: false, isOfflineMode: false);
+  final AppNavigation _appNavigation = AppNavigation();
+
+  AppState _state = const AppState(isDarkTheme: false, isOfflineMode: false);
 
   AppState get state => _state;
+
+  AppNavigation get appNavigation => _appNavigation;
 
   late StreamSubscription _themeSubscription;
 

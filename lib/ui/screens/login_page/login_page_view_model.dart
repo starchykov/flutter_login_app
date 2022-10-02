@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_login_app/domain/network_client/network_exceptions.dart';
+import 'package:flutter_login_app/domain/services/auth_repository.dart';
 import 'package:flutter_login_app/ui/navigation/app_navigation.dart';
-import 'package:mvvm_architecture/domain/network_client/network_exceptions.dart';
-import 'package:mvvm_architecture/domain/services/auth_repository.dart';
+import 'package:flutter_login_app/ui/screens/login_page/login_page_state.dart';
 
-import 'package:mvvm_architecture/ui/navigation/app_navigation.dart';
-import 'package:mvvm_architecture/ui/widgets/login_page/login_page_state.dart';
 
 class LoginPageViewModel extends ChangeNotifier {
   LoginPageState _state = const LoginPageState();

@@ -18,6 +18,10 @@ class CounterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        automaticallyImplyLeading: false,
+        middle: Text('Welcome'),
+      ),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,

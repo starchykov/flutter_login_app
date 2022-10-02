@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mvvm_architecture/domain/services/theme_service.dart';
-import 'package:mvvm_architecture/ui/widgets/setting_page/setting_page_state.dart';
+import 'package:flutter_login_app/domain/services/theme_service.dart';
+import 'package:flutter_login_app/ui/screens/setting_page/setting_page_state.dart';
 
 class SettingPageViewModel extends ChangeNotifier {
   final ThemeService _themeService = ThemeService();
 
-  SettingPageState _state = SettingPageState(isDarkTheme: false, isOfflineMode: false);
+  SettingPageState _state = const SettingPageState(isDarkTheme: false, isOfflineMode: false);
 
   SettingPageState get state => _state;
 
-  SettingPageViewModel () {
+  SettingPageViewModel() {
     _initialize();
   }
 
@@ -28,5 +28,4 @@ class SettingPageViewModel extends ChangeNotifier {
     _state = _state.copyWith(isDarkTheme: _themeService.isDarkMode);
     notifyListeners();
   }
-
 }

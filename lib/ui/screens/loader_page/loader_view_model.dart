@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_app/domain/services/auth_repository.dart';
 import 'package:flutter_login_app/ui/navigation/app_navigation.dart';
 class LoaderViewModel {
   final BuildContext context;
