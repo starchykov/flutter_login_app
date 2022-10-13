@@ -4,13 +4,13 @@ import 'package:flutter_login_app/ui/screens/application/app_state.dart';
 import 'package:flutter_login_app/ui/screens/application/app_view_model.dart';
 import 'package:provider/provider.dart';
 
-class MVVMApp extends StatelessWidget {
-  const MVVMApp({Key? key}) : super(key: key);
+class LoginApp extends StatelessWidget {
+  const LoginApp({Key? key}) : super(key: key);
 
   static Widget render() {
     return ChangeNotifierProvider(
       create: (context) => AppViewModel(),
-      child: const MVVMApp(),
+      child: const LoginApp(),
     );
   }
 

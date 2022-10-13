@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_login_app/ui/screens/contacts_screen/contacts_screen.dart';
 import 'package:flutter_login_app/ui/screens/counter_screen/counter_page.dart';
 import 'package:flutter_login_app/ui/screens/home_screen/home_page.dart';
 import 'package:flutter_login_app/ui/screens/loader_screen/loader_page.dart';
@@ -11,6 +12,7 @@ abstract class AppNavigationRoutes {
   static const loaderWidget = '/';
   static const loginWidget = '/login';
   static const homeWidget = '/home';
+  static const contactsWidget = '/contacts';
   static const settingWidget = '/setting';
 }
 
@@ -19,11 +21,12 @@ class AppNavigation {
     AppNavigationRoutes.loaderWidget: (context) => LoaderPage.render(),
     AppNavigationRoutes.loginWidget: (context) => LoginPage.render(),
     AppNavigationRoutes.homeWidget: (context) => HomePage.render(),
+    AppNavigationRoutes.contactsWidget: (context) => ContactsScreen.render(),
     AppNavigationRoutes.settingWidget: (context) => SettingPage.render(),
   };
 
   final List<Widget> bottomNavigationScreens = <Widget>[
-    CounterPage.render(),
+    ContactsScreen.render(),
     CounterPage.render(),
     SettingPage.render(),
   ];
