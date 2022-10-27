@@ -5,7 +5,7 @@ import 'package:flutter_login_app/ui/screens/counter_screen/counter_state.dart';
 class CounterViewModel extends ChangeNotifier {
   final CountService _countService = CountService();
 
-  CountViewModelState _state = CountViewModelState(count: '0');
+  CountViewModelState _state = const CountViewModelState(count: '0');
 
   CountViewModelState get state => _state;
 

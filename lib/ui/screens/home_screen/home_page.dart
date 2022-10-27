@@ -5,10 +5,12 @@ import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  static Widget render() => Provider<HomeViewModel>(
-        create: (context) => HomeViewModel(context: context),
-        child: const HomePage(),
-      );
+  static Widget render() {
+    return Provider<HomeViewModel>(
+      create: (context) => HomeViewModel(context: context),
+      child: const HomePage(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

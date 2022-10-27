@@ -196,7 +196,8 @@ class _LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final LoginPageViewModel model = context.read<LoginPageViewModel>();
     final buttonState = context.select((LoginPageViewModel value) => value.state.loginButtonState);
-    Future<void> Function()? onPressLogin = buttonState == LoginButtonState.canSubmit ? () => model.onLoginButtonPress(context: context) : null;
+    Future<void> Function()? onPressLogin =
+        buttonState == LoginButtonState.canSubmit ? () => model.onLoginButtonPress(context: context) : null;
     return CupertinoButton(
       color: CupertinoColors.activeBlue,
       disabledColor: CupertinoColors.activeBlue.withOpacity(.5),

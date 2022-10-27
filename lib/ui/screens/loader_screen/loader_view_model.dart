@@ -11,9 +11,8 @@ class LoaderViewModel {
   }
 
   void _initialize() async {
-    bool isAuthorize  = await _authRepository.checkAuth();
+    bool isAuthorize = await _authRepository.checkAuth();
     String nextRoute = isAuthorize ? AppNavigationRoutes.homeWidget : AppNavigationRoutes.loginWidget;
     Navigator.of(context).pushNamedAndRemoveUntil(nextRoute, (route) => false);
   }
-
 }
