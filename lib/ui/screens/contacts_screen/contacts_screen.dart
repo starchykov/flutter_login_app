@@ -39,21 +39,22 @@ class _ContactsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-        child: Row(
-          children: [
-            ClipOval(
-              child: Container(
-                width: 50,
-                height: 50,
-                color: CupertinoColors.systemFill,
-                alignment: Alignment.center,
-                child: Text('IS', style: CupertinoTheme.of(context).textTheme.pickerTextStyle),
-              ),
+      child: Row(
+        children: [
+          ClipOval(
+            child: Container(
+              width: 50,
+              height: 50,
+              color: CupertinoColors.systemFill,
+              alignment: Alignment.center,
+              child: Text('IS', style: CupertinoTheme.of(context).textTheme.pickerTextStyle),
             ),
-            const SizedBox(width: 16.0),
-            const Text('Ivan Starchykov'),
-          ],
-        ),
-        onPressed: () {});
+          ),
+          const SizedBox(width: 16.0),
+          const Text('Ivan Starchykov'),
+        ],
+      ),
+      onPressed: () {},
+    );
   }
 }

@@ -20,12 +20,14 @@ class LoginPage extends StatelessWidget {
       backgroundColor: CupertinoColors.white,
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            stops: const [0.2, 0.5, 0.8, 0.7],
-            colors: [Colors.blue[50]!, Colors.blue[100]!, Colors.blue[200]!, Colors.blue[300]!],
+        decoration: const BoxDecoration(
+          gradient: RadialGradient(
+            radius: 2,
+            center: Alignment.centerLeft,
+            colors: [
+              Color.fromRGBO(135, 177, 238, 1.0),
+              Colors.white,
+            ],
           ),
         ),
         child: Column(
@@ -62,9 +64,20 @@ class _LoginText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Login In',
+      'Sing In',
       style: TextStyle(fontSize: 40, color: CupertinoColors.activeBlue.withOpacity(.6), fontWeight: FontWeight.w700),
     );
+    // Container(
+    //   height: 180,
+    //   decoration: BoxDecoration(
+    //     image: DecorationImage(
+    //       opacity: .2,
+    //       image: AssetImage('assets/images/cloud.png'),
+    //       alignment: Alignment.centerLeft,
+    //       fit: BoxFit.fitHeight,
+    //     ),
+    //   ),
+    // ),
   }
 }
 
