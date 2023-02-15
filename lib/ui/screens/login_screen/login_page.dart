@@ -16,40 +16,62 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      backgroundColor: CupertinoColors.white,
+    return GestureDetector(
+      onTap: () {},
       child: Container(
-        padding: const EdgeInsets.all(16.0),
+        width: double.infinity,
         decoration: const BoxDecoration(
-          gradient: RadialGradient(
-            radius: 2,
-            center: Alignment.centerLeft,
-            colors: [
-              Color.fromRGBO(135, 177, 238, 1.0),
-              Colors.white,
-            ],
+          image: DecorationImage(
+            fit: BoxFit.fitHeight,
+            image: AssetImage('assets/images/background_2.png'),
           ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Spacer(),
-            _LoginText(),
-            SizedBox(height: 16 * 4),
-            _LoginUsername(),
-            SizedBox(height: 16),
-            _LoginPassword(),
-            SizedBox(height: 16),
-            _ErrorTitle(),
-            SizedBox(height: 16 * 3),
-            _LoginButton(),
-            SizedBox(height: 16),
-            _RegisterButton(),
-            Spacer(),
-            Align(alignment: Alignment.bottomCenter, child: Text('© 2022 Copyright Starchykov')),
-          ],
+        child: OverflowBox(
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: FractionalOffset(0.0, 0.9),
+                end: FractionalOffset(0.0, 0.0),
+                stops: [0.25, 0.9],
+                colors: [Color(0xFF000000), Color(0x2d46a0ff)],
+              ),
+            ),
+            child: CupertinoPageScaffold(
+              backgroundColor: Colors.transparent,
+              child: Form(
+                child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: Container(
+                    padding: const EdgeInsets.all(16.0),
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        const Spacer(),
+                        const _LoginText(),
+                        const _LoginUsername(),
+                        const _LoginPassword(),
+                        const _ErrorTitle(),
+                        const _LoginButton(),
+                        const _RegisterButton(),
+                        SizedBox(height: MediaQuery.of(context).size.height * .15),
+                        const _LoginPageLogo(),
+                        const Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            '© 2022-2023 Copyright Starchykov',
+                            style: TextStyle(color: CupertinoColors.white),
+                          ),
+                        ),
+                        // const Warning()
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -63,21 +85,10 @@ class _LoginText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Sing In',
-      style: TextStyle(fontSize: 40, color: CupertinoColors.activeBlue.withOpacity(.6), fontWeight: FontWeight.w700),
+    return const Text(
+      ' ',
+      style: TextStyle(fontSize: 55, color: CupertinoColors.white, fontWeight: FontWeight.w700),
     );
-    // Container(
-    //   height: 180,
-    //   decoration: BoxDecoration(
-    //     image: DecorationImage(
-    //       opacity: .2,
-    //       image: AssetImage('assets/images/cloud.png'),
-    //       alignment: Alignment.centerLeft,
-    //       fit: BoxFit.fitHeight,
-    //     ),
-    //   ),
-    // ),
   }
 }
 
@@ -87,23 +98,25 @@ class _ErrorTitle extends StatelessWidget {
   void showCupertinoSnackBar(BuildContext context, {required String error, int durationMillis = 3000}) {
     final OverlayEntry overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        top: 30,
+        top: 8.0,
         left: 8.0,
         right: 8.0,
-        child: CupertinoPopupSurface(
-          child: Container(
-            color: CupertinoColors.destructiveRed,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Text(
-              error,
-              style: const TextStyle(fontSize: 14.0, color: CupertinoColors.white),
+        child: SafeArea(
+          child: CupertinoPopupSurface(
+            child: Container(
+              color: CupertinoColors.destructiveRed,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Text(
+                error,
+                style: const TextStyle(fontSize: 14.0, color: CupertinoColors.white),
+              ),
             ),
           ),
         ),
       ),
     );
     Future.delayed(Duration(milliseconds: durationMillis), overlayEntry.remove);
-    Overlay.of(context)?.insert(overlayEntry);
+    Overlay.of(context).insert(overlayEntry);
   }
 
   @override
@@ -112,18 +125,17 @@ class _ErrorTitle extends StatelessWidget {
     if (error.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((duration) => showCupertinoSnackBar(context, error: error));
     }
-    return SizedBox(
-      height: 30,
-      child: Material(
-        color: Colors.transparent,
-        child: Row(
-          children: [
-            SizedBox(
-              height: 30,
-              child: Text(error),
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Row(
+        children: [
+          if (error.isNotEmpty) const Icon(CupertinoIcons.info_circle_fill, size: 14, color: CupertinoColors.white),
+          const SizedBox(width: 4),
+          Text(
+            error,
+            style: const TextStyle(fontSize: 14.0, color: CupertinoColors.white),
+          ),
+        ],
       ),
     );
   }
@@ -137,18 +149,24 @@ class _LoginUsername extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LoginPageViewModel model = context.read<LoginPageViewModel>();
-    return CupertinoTextField(
-      padding: const EdgeInsets.all(10),
-      prefix: Padding(
-        padding: const EdgeInsets.only(left: 8.0),
-        child: Icon(CupertinoIcons.person_fill, size: 16, color: CupertinoColors.activeBlue.withOpacity(.6)),
+    return Container(
+      height: 55.0,
+      margin: const EdgeInsets.only(top: 20.0),
+      child: CupertinoTextField(
+        padding: const EdgeInsets.all(10),
+        style: const TextStyle(color: CupertinoColors.white),
+        placeholderStyle: const TextStyle(color: CupertinoColors.white),
+        placeholder: 'Welcome',
+        prefix: const Padding(
+          padding: EdgeInsets.only(left: 8.0),
+          child: Icon(CupertinoIcons.person_crop_circle_fill, color: CupertinoColors.white),
+        ),
+        decoration: BoxDecoration(
+          color: CupertinoColors.white.withOpacity(.4),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+        ),
+        onChanged: (value) => model.login(value: value),
       ),
-      placeholder: 'Login',
-      decoration: BoxDecoration(
-        border: Border.all(color: CupertinoColors.activeBlue.withOpacity(.6)),
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      onChanged: (value) => model.login(value: value),
     );
   }
 }
@@ -161,23 +179,32 @@ class _LoginPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LoginPageViewModel model = context.read<LoginPageViewModel>();
-    return CupertinoTextField(
-      padding: const EdgeInsets.all(10),
-      prefix: Padding(
-        padding: const EdgeInsets.only(left: 8.0),
-        child: Icon(CupertinoIcons.lock_fill, size: 16, color: CupertinoColors.activeBlue.withOpacity(.6)),
-      ),
-      placeholder: 'Password',
-      suffix: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Icon(CupertinoIcons.eye_solid, size: 16, color: CupertinoColors.activeBlue.withOpacity(.6)),
-      ),
-      obscureText: true,
+    return Container(
+      height: 55.0,
+      margin: const EdgeInsets.only(top: 20.0),
       decoration: BoxDecoration(
-        border: Border.all(color: CupertinoColors.activeBlue.withOpacity(.6)),
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.circular(12.0),
+        color: CupertinoColors.white.withOpacity(.4),
       ),
-      onChanged: (value) => model.password(value: value),
+      child: CupertinoTextField(
+        padding: const EdgeInsets.all(10),
+        style: const TextStyle(color: CupertinoColors.white),
+        placeholderStyle: const TextStyle(color: CupertinoColors.white),
+        prefix: const Padding(
+          padding: EdgeInsets.only(left: 8.0),
+          child: Icon(CupertinoIcons.lock_circle_fill, color: CupertinoColors.white),
+        ),
+        placeholder: 'Password',
+        suffix: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Icon(CupertinoIcons.eye_solid, size: 16, color: CupertinoColors.white.withOpacity(.6)),
+        ),
+        obscureText: true,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        onChanged: (value) => model.password(value: value),
+      ),
     );
   }
 }
@@ -190,11 +217,13 @@ class _RegisterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CupertinoButton(
-        padding: EdgeInsets.zero,
-        disabledColor: CupertinoColors.activeBlue.withOpacity(.6),
-        onPressed: () {},
-        child: const Text('Create an account'),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20.0),
+        child: CupertinoButton(
+          disabledColor: CupertinoColors.activeBlue.withOpacity(.6),
+          onPressed: () {},
+          child: const Text('Create an account'),
+        ),
       ),
     );
   }
@@ -211,24 +240,64 @@ class _LoginButton extends StatelessWidget {
     final buttonState = context.select((LoginPageViewModel value) => value.state.loginButtonState);
     Future<void> Function()? onPressLogin =
         buttonState == LoginButtonState.canSubmit ? () => model.onLoginButtonPress(context: context) : null;
-    return CupertinoButton(
-      color: CupertinoColors.activeBlue,
-      disabledColor: CupertinoColors.activeBlue.withOpacity(.5),
-      onPressed: onPressLogin,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Visibility(
-            visible: model.state.authInProcess,
-            child: const CupertinoActivityIndicator(color: CupertinoColors.white),
-          ),
-          Visibility(
-            visible: !model.state.authInProcess,
-            child: const Text('Login'),
-          ),
-        ],
+    return Container(
+      height: 55.0,
+      margin: const EdgeInsets.only(top: 30.0),
+      child: CupertinoButton(
+        color: CupertinoColors.activeBlue,
+        disabledColor: CupertinoColors.systemBlue,
+        onPressed: onPressLogin,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Visibility(
+              visible: model.state.authInProcess,
+              child: const CupertinoActivityIndicator(color: CupertinoColors.white),
+            ),
+            Visibility(
+              visible: !model.state.authInProcess,
+              child: Row(
+                children: const [
+                  Text('Login'),
+                  SizedBox(width: 8),
+                  Icon(
+                    CupertinoIcons.arrow_right_circle,
+                    color: CupertinoColors.white,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class _LoginPageLogo extends StatelessWidget {
+  const _LoginPageLogo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          height: 30,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/cloud_1.png'),
+                alignment: Alignment.bottomCenter,
+                fit: BoxFit.fitHeight),
+          ),
+        ),
+        const SizedBox(height: 15),
+        const Text(
+          'App version 1',
+          style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w300, fontSize: 12),
+        ),
+        const SizedBox(height: 30),
+      ],
     );
   }
 }
