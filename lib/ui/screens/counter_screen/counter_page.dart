@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_app/ui/screens/counter_screen/counter_state.dart';
 import 'package:flutter_login_app/ui/screens/counter_screen/counter_view_model.dart';
-
+import 'package:flutter_login_app/ui/screens/ptt_screen/ptt_screen.dart';
 import 'package:provider/provider.dart';
 
 class CounterPage extends StatelessWidget {
@@ -25,10 +25,11 @@ class CounterPage extends StatelessWidget {
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: const [
-            _CountTitle(),
-            _CountIncrementButton(),
-            _CountDecrementButton(),
+          children:  [
+            // _CountTitle(),
+            // _CountIncrementButton(),
+            // _CountDecrementButton(),
+            PTT.render(),
           ],
         ),
       ),

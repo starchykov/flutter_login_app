@@ -2,7 +2,7 @@ import 'package:flutter_login_app/data/data_providers/session_auth_provider.dart
 import 'package:flutter_login_app/data/data_providers/session_data_provider.dart';
 
 
-class AuthRepository {
+class AuthService {
   final SessionAuthProvider _sessionAuthProvider = SessionAuthProvider();
   final SessionDataProvider _sessionDataProvider = SessionDataProvider();
 

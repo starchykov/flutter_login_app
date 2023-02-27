@@ -8,7 +8,7 @@ class SettingPage extends StatelessWidget {
 
   static Widget render() {
     return ChangeNotifierProvider(
-      create: (context) => SettingPageViewModel(),
+      create: (context) => SettingPageViewModel(context: context),
       child: const SettingPage(),
     );
   }
@@ -18,9 +18,14 @@ class SettingPage extends StatelessWidget {
     SettingPageViewModel viewModel = context.read<SettingPageViewModel>();
     SettingPageState state = context.select((SettingPageViewModel viewModel) => viewModel.state);
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
+      navigationBar: CupertinoNavigationBar(
         automaticallyImplyLeading: true,
-        middle: Text('Settings'),
+        middle: const Text('Settings'),
+        trailing: CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: viewModel.onLogoutButtonClicked,
+          child: const Icon(CupertinoIcons.square_arrow_right),
+        ),
       ),
       child: Center(
         child: Column(

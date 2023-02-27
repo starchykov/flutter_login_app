@@ -4,7 +4,7 @@ import 'package:flutter_login_app/ui/app_navigation/app_navigation.dart';
 
 class LoaderViewModel {
   final BuildContext context;
-  final AuthRepository _authRepository = AuthRepository();
+  final AuthService _authRepository = AuthService();
 
   LoaderViewModel({required this.context}) {
     _initialize();

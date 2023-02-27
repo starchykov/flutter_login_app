@@ -8,7 +8,7 @@ import 'package:flutter_login_app/ui/screens/login_screen/login_page_state.dart'
 class LoginPageViewModel extends ChangeNotifier {
   LoginPageState _state = const LoginPageState();
 
-  final AuthRepository _authRepository = AuthRepository();
+  final AuthService _authRepository = AuthService();
 
   LoginPageState get state => _state;
 

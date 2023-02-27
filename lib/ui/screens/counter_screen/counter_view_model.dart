@@ -10,7 +10,11 @@ class CounterViewModel extends ChangeNotifier {
   CountViewModelState get state => _state;
 
   CounterViewModel() {
-    _loadValue();
+    _initialize();
+  }
+
+  void _initialize() async {
+    await _loadValue();
   }
 
   Future<void> _loadValue() async {

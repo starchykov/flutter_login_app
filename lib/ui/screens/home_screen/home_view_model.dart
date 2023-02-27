@@ -4,7 +4,7 @@ import 'package:flutter_login_app/ui/app_navigation/app_navigation.dart';
 
 class HomeViewModel {
   final BuildContext context;
-  final AuthRepository _authRepository = AuthRepository();
+  final AuthService _authRepository = AuthService();
   final AppNavigation _appNavigation = AppNavigation();
 
   HomeViewModel({required this.context});

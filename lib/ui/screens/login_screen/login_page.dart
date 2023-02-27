@@ -259,7 +259,10 @@ class _LoginButton extends StatelessWidget {
               visible: !model.state.authInProcess,
               child: Row(
                 children: const [
-                  Text('Login'),
+                  Text(
+                    'Login',
+                    style: TextStyle(color: CupertinoColors.white),
+                  ),
                   SizedBox(width: 8),
                   Icon(
                     CupertinoIcons.arrow_right_circle,
