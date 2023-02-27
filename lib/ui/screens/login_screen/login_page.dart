@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_app/ui/screens/login_screen/login_page_state.dart';
@@ -19,6 +21,7 @@ class LoginPage extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
+        clipBehavior: Clip.hardEdge,
         width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -152,20 +155,26 @@ class _LoginUsername extends StatelessWidget {
     return Container(
       height: 55.0,
       margin: const EdgeInsets.only(top: 20.0),
-      child: CupertinoTextField(
-        padding: const EdgeInsets.all(10),
-        style: const TextStyle(color: CupertinoColors.white),
-        placeholderStyle: const TextStyle(color: CupertinoColors.white),
-        placeholder: 'Welcome',
-        prefix: const Padding(
-          padding: EdgeInsets.only(left: 8.0),
-          child: Icon(CupertinoIcons.person_crop_circle_fill, color: CupertinoColors.white),
+      child: ClipRect(
+        clipBehavior: Clip.hardEdge,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: CupertinoTextField(
+            padding: const EdgeInsets.all(10),
+            style: const TextStyle(color: CupertinoColors.white),
+            placeholderStyle: const TextStyle(color: CupertinoColors.white),
+            placeholder: 'Login',
+            prefix: const Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Icon(CupertinoIcons.person_crop_circle_fill, color: CupertinoColors.white),
+            ),
+            decoration: BoxDecoration(
+              color: CupertinoColors.white.withOpacity(.4),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            onChanged: (value) => model.login(value: value),
+          ),
         ),
-        decoration: BoxDecoration(
-          color: CupertinoColors.white.withOpacity(.4),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-        ),
-        onChanged: (value) => model.login(value: value),
       ),
     );
   }
@@ -178,32 +187,44 @@ class _LoginPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LoginPageViewModel model = context.read<LoginPageViewModel>();
+    final LoginPageViewModel viewModel = context.read<LoginPageViewModel>();
+    final LoginPageState state = context.select((LoginPageViewModel viewModel) => viewModel.state);
     return Container(
       height: 55.0,
       margin: const EdgeInsets.only(top: 20.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        color: CupertinoColors.white.withOpacity(.4),
-      ),
-      child: CupertinoTextField(
-        padding: const EdgeInsets.all(10),
-        style: const TextStyle(color: CupertinoColors.white),
-        placeholderStyle: const TextStyle(color: CupertinoColors.white),
-        prefix: const Padding(
-          padding: EdgeInsets.only(left: 8.0),
-          child: Icon(CupertinoIcons.lock_circle_fill, color: CupertinoColors.white),
+      child: ClipRect(
+        clipBehavior: Clip.hardEdge,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: CupertinoTextField(
+            padding: const EdgeInsets.all(10),
+            style: const TextStyle(color: CupertinoColors.white),
+            placeholderStyle: const TextStyle(color: CupertinoColors.white),
+            prefix: const Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Icon(CupertinoIcons.lock_circle_fill, color: CupertinoColors.white),
+            ),
+            obscureText: state.hidePassword,
+            placeholder: 'Password',
+            suffix: GestureDetector(
+              onLongPressStart: (_) => viewModel.showPassword(),
+              onLongPressEnd: (_) => viewModel.showPassword(),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  CupertinoIcons.eye_solid,
+                  size: 16,
+                  color: CupertinoColors.white.withOpacity(state.hidePassword ? .6 : .2),
+                ),
+              ),
+            ),
+            decoration: BoxDecoration(
+              color: CupertinoColors.white.withOpacity(.4),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            onChanged: (value) => viewModel.password(value: value),
+          ),
         ),
-        placeholder: 'Password',
-        suffix: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Icon(CupertinoIcons.eye_solid, size: 16, color: CupertinoColors.white.withOpacity(.6)),
-        ),
-        obscureText: true,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        onChanged: (value) => model.password(value: value),
       ),
     );
   }
@@ -296,7 +317,7 @@ class _LoginPageLogo extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         const Text(
-          'App version 1',
+          'App version 1.0.0',
           style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w300, fontSize: 12),
         ),
         const SizedBox(height: 30),

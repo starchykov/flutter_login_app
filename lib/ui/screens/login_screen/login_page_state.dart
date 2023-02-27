@@ -8,6 +8,7 @@ class LoginPageState {
   final String login;
   final String password;
   final bool authInProcess;
+  final bool hidePassword;
 
   LoginButtonState get loginButtonState {
     if (authInProcess) return LoginButtonState.disabled;
@@ -20,6 +21,7 @@ class LoginPageState {
     this.login = '',
     this.password = '',
     this.authInProcess = false,
+    this.hidePassword = true,
   });
 
   LoginPageState copyWith({
@@ -27,12 +29,14 @@ class LoginPageState {
     String? login,
     String? password,
     bool? authInProcess,
+    bool? hidePassword,
   }) {
     return LoginPageState(
       authErrorTitle: authErrorTitle ?? this.authErrorTitle,
       login: login ?? this.login,
       password: password ?? this.password,
       authInProcess: authInProcess ?? this.authInProcess,
+      hidePassword: hidePassword ?? this.hidePassword,
     );
   }
 }

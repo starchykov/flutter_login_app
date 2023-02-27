@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_login_app/domain/network_client/network_exceptions.dart';
 import 'package:flutter_login_app/domain/services/auth_service.dart';
 import 'package:flutter_login_app/ui/app_navigation/app_navigation.dart';
@@ -12,15 +13,27 @@ class LoginPageViewModel extends ChangeNotifier {
 
   LoginPageState get state => _state;
 
+  ///
   void login({required String value}) {
     if (_state.login == value) return;
     _state = _state.copyWith(login: value);
     notifyListeners();
   }
 
+  /// 
   void password({required String value}) {
     if (_state.password == value) return;
     _state = _state.copyWith(password: value);
+    notifyListeners();
+  }
+
+  /// This Flutter method is used to show or hide input text in an application.
+  /// It utilizes HapticFeedback to create a selection click sound,
+  /// and then uses the copyWith() method to update the state of the input text to show or hide it.
+  /// After the state has been updated, it calls the notifyListeners() method to notify any listeners of the change.
+  void showPassword() {
+    HapticFeedback.selectionClick();
+    _state = _state.copyWith(hidePassword: !_state.hidePassword);
     notifyListeners();
   }
 
