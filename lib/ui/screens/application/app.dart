@@ -3,6 +3,7 @@ import 'package:flutter_login_app/ui/app_navigation/app_navigation.dart';
 import 'package:flutter_login_app/ui/screens/application/app_state.dart';
 import 'package:flutter_login_app/ui/screens/application/app_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginApp extends StatelessWidget {
   const LoginApp({Key? key}) : super(key: key);
@@ -20,11 +21,13 @@ class LoginApp extends StatelessWidget {
     final AppState state = context.select((AppViewModel viewModel) => viewModel.state);
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
+      locale: Locale(state.locale),
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: CupertinoThemeData(
         primaryColor: CupertinoColors.activeBlue,
         brightness: state.isDarkTheme ? Brightness.dark : Brightness.light,
       ),
-      // supportedLocales: Language.locales,
       routes: viewModel.appNavigation.routes,
       initialRoute: AppNavigationRoutes.loaderWidget,
     );

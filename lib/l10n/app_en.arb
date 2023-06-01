@@ -1,0 +1,27 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "language": "{language, select, en{English} uk{Ukrainian} other{Other}}",
+  "@pronoun": {
+    "description": "A Language message",
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
+  "en": "English",
+  "@en": {
+    "description": "English language description code"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Page title for settings page"
+  },
+  "darkMode": "Dark mode",
+  "@darkMode": {
+    "description": "List title for Dark mode setting control"
+  }
+}
