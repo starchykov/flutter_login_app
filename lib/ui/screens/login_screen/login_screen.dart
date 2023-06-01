@@ -1,18 +1,16 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_login_app/ui/screens/login_screen/login_page_state.dart';
-import 'package:flutter_login_app/ui/screens/login_screen/login_page_view_model.dart';
+import 'package:flutter_login_app/ui/screens/login_screen/login_screen_state.dart';
+import 'package:flutter_login_app/ui/screens/login_screen/login_screen_view_model.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   static Widget render() {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => LoginPageViewModel(),
-      child: const LoginPage(),
+      create: (BuildContext context) => LoginPageViewModel(context: context),
+      child: const LoginScreen(),
     );
   }
 
@@ -40,11 +38,12 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             child: CupertinoPageScaffold(
-              backgroundColor: Colors.transparent,
+              backgroundColor: const Color(0x00000000),
               child: Form(
                 child: SingleChildScrollView(
                   physics: const ClampingScrollPhysics(),
                   child: Container(
+                    // if (1 = 1) ...(margin: 6),
                     padding: const EdgeInsets.all(16.0),
                     height: MediaQuery.of(context).size.height,
                     child: Column(
@@ -212,7 +211,7 @@ class _LoginPassword extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(
-                  CupertinoIcons.eye_solid,
+                  CupertinoIcons.eye_fill,
                   size: 16,
                   color: CupertinoColors.white.withOpacity(state.hidePassword ? .6 : .2),
                 ),
@@ -237,12 +236,13 @@ class _RegisterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LoginPageViewModel viewModel = context.read<LoginPageViewModel>();
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: CupertinoButton(
           disabledColor: CupertinoColors.activeBlue.withOpacity(.6),
-          onPressed: () {},
+          onPressed: viewModel.registration,
           child: const Text('Create an account'),
         ),
       ),
@@ -259,8 +259,7 @@ class _LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final LoginPageViewModel model = context.read<LoginPageViewModel>();
     final buttonState = context.select((LoginPageViewModel value) => value.state.loginButtonState);
-    Future<void> Function()? onPressLogin =
-        buttonState == LoginButtonState.canSubmit ? () => model.onLoginButtonPress(context: context) : null;
+    Future<void> Function()? onPressLogin = buttonState == LoginButtonState.canSubmit ? () => model.onLoginButtonPress() : null;
     return Container(
       height: 55.0,
       margin: const EdgeInsets.only(top: 30.0),
@@ -278,8 +277,8 @@ class _LoginButton extends StatelessWidget {
             ),
             Visibility(
               visible: !model.state.authInProcess,
-              child: Row(
-                children: const [
+              child: const Row(
+                children: [
                   Text(
                     'Login',
                     style: TextStyle(color: CupertinoColors.white),
@@ -318,7 +317,7 @@ class _LoginPageLogo extends StatelessWidget {
         const SizedBox(height: 15),
         const Text(
           'App version 1.0.0',
-          style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w300, fontSize: 12),
+          style: TextStyle(color: CupertinoColors.inactiveGray, fontWeight: FontWeight.w300, fontSize: 12),
         ),
         const SizedBox(height: 30),
       ],

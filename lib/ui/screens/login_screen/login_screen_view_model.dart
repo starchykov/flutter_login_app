@@ -3,15 +3,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_login_app/domain/network_client/network_exceptions.dart';
 import 'package:flutter_login_app/domain/services/auth_service.dart';
 import 'package:flutter_login_app/ui/app_navigation/app_navigation.dart';
-import 'package:flutter_login_app/ui/screens/login_screen/login_page_state.dart';
+import 'package:flutter_login_app/ui/screens/login_screen/login_screen_state.dart';
 
 
 class LoginPageViewModel extends ChangeNotifier {
-  LoginPageState _state = const LoginPageState();
+  final BuildContext context;
 
   final AuthService _authRepository = AuthService();
+  LoginPageState _state = const LoginPageState();
 
   LoginPageState get state => _state;
+
+  LoginPageViewModel({required this.context});
 
   ///
   void login({required String value}) {
@@ -37,7 +40,7 @@ class LoginPageViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> onLoginButtonPress({required BuildContext context}) async {
+  Future<void> onLoginButtonPress() async {
     final String login = _state.login;
     final String password = _state.password;
 
@@ -58,5 +61,9 @@ class LoginPageViewModel extends ChangeNotifier {
     } finally {
       notifyListeners();
     }
+  }
+
+  void registration() {
+    Navigator.of(context).pushNamed(AppNavigationRoutes.registrationWidget);
   }
 }
