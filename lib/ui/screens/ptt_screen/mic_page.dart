@@ -62,7 +62,7 @@ class _MicStreamExampleAppState extends State<MicStreamExampleApp>
   void _controlPage(int index) => setState(() => page = index);
 
   // Responsible for switching between recording / idle state
-  void _controlMicStream({Command command: Command.change}) async {
+  void _controlMicStream({Command command = Command.change}) async {
     switch (command) {
       case Command.change:
         _changeListening();

@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_login_app/ui/screens/home_screen/home_view_model.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   static Widget render() {
     return Provider<HomeViewModel>(
       create: (context) => HomeViewModel(context: context),
-      child: const HomePage(),
+      child: const HomeScreen(),
     );
   }
 
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeViewModel viewModel = context.read<HomeViewModel>();
     return CupertinoTabScaffold(
-      tabBuilder: (builder, int index) => SafeArea(child: viewModel.renderScreen(screenIndex: index)),
+      tabBuilder: (builder, int index) => viewModel.renderScreen(screenIndex: index),
       tabBar: CupertinoTabBar(
         items: const [
           BottomNavigationBarItem(
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.settings),
-            label: 'Profile',
+            label: 'Settings',
           )
         ],
       ),
