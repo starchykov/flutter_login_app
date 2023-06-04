@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_app/ui/screens/counter_screen/counter_state.dart';
 import 'package:flutter_login_app/ui/screens/counter_screen/counter_view_model.dart';
-import 'package:flutter_login_app/ui/screens/ptt_screen/ptt_screen.dart';
 import 'package:provider/provider.dart';
 
 class CounterPage extends StatelessWidget {
@@ -17,8 +16,8 @@ class CounterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
+    return const CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
         automaticallyImplyLeading: false,
         middle: Text('Welcome'),
       ),
@@ -26,10 +25,9 @@ class CounterPage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children:  [
-            // _CountTitle(),
-            // _CountIncrementButton(),
-            // _CountDecrementButton(),
-            PTT.render(),
+            _CountTitle(),
+            _CountIncrementButton(),
+            _CountDecrementButton(),
           ],
         ),
       ),
